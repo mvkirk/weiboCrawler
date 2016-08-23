@@ -1,48 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh">
- <head>
-  <meta charset="utf-8"/>
-  <link href="http://h5.sinaimg.cn" rel="dns-prefetch"/>
-  <link href="http://u1.sinaimg.cn" rel="dns-prefetch"/>
-  <link href="http://ww1.sinaimg.cn" rel="dns-prefetch"/>
-  <link href="http://ww2.sinaimg.cn" rel="dns-prefetch"/>
-  <link href="http://ww3.sinaimg.cn" rel="dns-prefetch"/>
-  <link href="http://ww4.sinaimg.cn" rel="dns-prefetch"/>
-  <meta content="yes" name="apple-mobile-web-app-capable"/>
-  <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-  <link href="http://u1.sinaimg.cn/upload/h5/img/apple-touch-icon.png" rel="apple-touch-icon"/>
-  <link color="black" href="http://h5.sinaimg.cn/upload/2015/05/15/28/WeiboLogoCh.svg" mask="" rel="icon" sizes="any"/>
-  <title>
-   个人主页
-  </title>
-  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" id="viewport" name="viewport"/>
-  <meta content="telephone=no" name="format-detection"/>
-  <script>
-   var _loadStart = new Date().getTime();
-  </script>
-  <link href="//h5.sinaimg.cn/weibocn/v6/css/lib/base-d1c7f99e51e81f2aec863e6539d97dbb.css" rel="stylesheet" type="text/css"/>
-  <link href="//h5.sinaimg.cn/weibocn/v6/css/card/cards-9babdfd7da6f88b20fc47e0d79a2977d.css" rel="stylesheet" type="text/css"/>
-  <link href="//h5.sinaimg.cn/weibocn/v6/css/mod/mods.all-26509c7157fd8de7e00321948c25c6c3.css" rel="stylesheet" type="text/css"/>
- </head>
- <body>
-  <div class="container stage-page" id="box">
-  </div>
-  <script>
-   window.$config={'stage':'page','stageId':'1005055587464347'};window.$render_data = {'stage': {'page': [{"mod_type":"mod\/topbar","title":{"txt":"\u4e2a\u4eba\u4e3b\u9875","txt_sub":false},"btn":{"left":"back","right":{"icon":"more","type":"more"}},"fixed":1,"transparent":1},{"h5icon":{"main":0,"other":["http:\/\/u1.sinaimg.cn\/upload\/2013\/01\/23\/crown_2x.png"]},"background":"http:\/\/ww1.sinaimg.cn\/crop.0.0.640.640.640.750\/00668qIHjw1ezpkpvid5sj30yi0yg78y.jpg","profile_image_url":"http:\/\/tva2.sinaimg.cn\/crop.0.0.1242.1242.50\/00668qIHjw8ezpkqo6romj30yi0yiack.jpg","id":"5587464347","description":"\u5728\u5954\u5411\u9017\u6bd4\u7684\u8def\u4e0a\uff0c\u52c7\u5f80\u76f4\u524d\uff01","verified":"","verified_type":"-1","attNum":"196","nativePlace":"\u5317\u4eac","mblogNum":"147","fansNum":"109062","following":"","follow_me":"","favourites_count":"115","verified_reason":"","name":"\u7eb8\u4e0a\u897f\u6e38","avatar_hd":"http:\/\/tva2.sinaimg.cn\/crop.0.0.1242.1242.1024\/00668qIHjw8ezpkqo6romj30yi0yiack.jpg","ptype":"0","created_at":"Tue Apr 14 21:13:34 +0800 2015","mbtype":"12","mbrank":"4","genderIcon":"http:\/\/u1.sinaimg.cn\/upload\/h5\/img\/male.png","ta":"\u4ed6","relation":"0","desc_scheme":"\/users\/5587464347","buttons":[{"type":"link","icon":"iconf_userinfo_message","name":"\u79c1\u4fe1","scheme":"\/msg\/chat?uid=5587464347"},{"type":"relation","sub_type":0,"uid":"5587464347"}],"mod_type":"mod\/cover"},{"mod_type":"mod\/pagelist","previous_cursor":"","next_cursor":"","card_group":[{"card_type":2,"card_type_name":"\u5e94\u7528\u5217\u8868","itemid":"1005055587464347_-_WEIBO_INDEX_PROFILE_APPS","is_asyn":1,"apps":[],"openurl":"","async_api":"\/page\/card?itemid=1005055587464347_-_WEIBO_INDEX_PROFILE_APPS"},{"card_type":11,"card_type_name":"\u5fae\u535a","itemid":"1005055587464347_-_WEIBO_INDEX_PROFILE_WEIBO_GROUP_OBJ","is_asyn":1,"card_group":[],"openurl":"","async_api":"\/page\/card?itemid=1005055587464347_-_WEIBO_INDEX_PROFILE_WEIBO_GROUP_OBJ"}]}]},'common':{"cacheHit":0,"isLogin":false,"loginUrl":"https:\/\/passport.weibo.cn\/signin\/welcome?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347&containerid=100505&extparam=u5587464347","wx_callback":"https:\/\/passport.weibo.com\/othersitebind\/authorize?entry=h53rdlanding&site=qq&callback=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347","wx_authorize":"https:\/\/passport.weibo.com\/othersitebind\/authorize?site=weixin&entry=sinawap&type=normal&callback=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347","passport_login_url":"https:\/\/passport.weibo.cn\/signin\/login?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347","deviceType":"Android","browserType":"Safari","online":true,"wm":null,"st":"3956b2","isInClient":0,"isWechat":0,"hideHeaderBanner":0,"request_key":"a98b2e101e8fddaf0ba90a3ea8ef8623","uid":false,"containerid":"1005055587464347","hidemenu":null,"hideFooterPage":true,"partner":0,"callClient":0,"hideNotice":0,"hideLoginBanner":0,"showPopLogin":0,"showLoginButton":1,"seeLevel":false,"pageType":"userInfo","scheme":"sinaweibo:\/\/userinfo?uid=5587464347&luicode=10000011&lfid=","title":"\u4e2a\u4eba\u4e3b\u9875","params":{"containerid":"100505","extparam":"u5587464347","_T_WM":"6d0bd446a77d2176c7277aefe0385cce","v_p":5,"featurecode":20000181,"ext":"","fid":"1005055587464347","uicode":10000011},"ctrl":"pages\/index","stage":"page"}};
-  </script>
-  <script src="//h5.sinaimg.cn/weibocn/v6/js/brick-76ae01305b992768a42130318554554c.js">
-  </script>
-  <script src="//h5.sinaimg.cn/weibocn/v6/js/boot-0d4d7c13b7e67ad96bf6f83ee93d2e86.js">
-  </script>
-  <script>
-   require.config({baseUrl: '//h5.sinaimg.cn/weibocn/v6/js/',paths: {'jquery': '//h5.sinaimg.cn/weibocn/v6/js/lib/jquery2-3a24ecb46cb1716600660086a85ad0b0.js','card/cards': '//h5.sinaimg.cn/weibocn/v6/js/card/cards-cdf50ca5b787524a6498be83caa4dbe0.js','act/acts': '//h5.sinaimg.cn/weibocn/v6/js/act/acts-19eed856c4aa27ed4a48236e36fd78ae.js','tpl/mod/mods.all': '//h5.sinaimg.cn/weibocn/v6/js/tpl/mod/mods.all-baa8aa348c8f1d67a4f598567ef08f83.js','mod/mods.all': '//h5.sinaimg.cn/weibocn/v6/js/mod/mods.all-1c3e055e9370826554c440995094e0e4.js','ctrl/page': '','core/lib/iscroll':'//h5.sinaimg.cn/weibocn/v6/js/core/lib/iscroll-533a8990c281d2d743b186bd4f83decc.js'}});
-  </script>
-  <script>
-   require(['boot','jquery']);
-  </script>
- </body>
-</html>{
-    "stageId": "1005055587464347", 
+{
+    "stageId": "1005053894655667", 
     "stage": "page"
 }{
     "common": {
@@ -50,49 +7,47 @@
         "hideFooterPage": true, 
         "ctrl": "pages/index", 
         "hideNotice": 0, 
-        "request_key": "a98b2e101e8fddaf0ba90a3ea8ef8623", 
+        "request_key": "3f84d422cb7410b156ab5a0229d856f4", 
         "isInClient": 0, 
         "partner": 0, 
         "callClient": 0, 
         "hidemenu": null, 
-        "passport_login_url": "https://passport.weibo.cn/signin/login?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347", 
+        "passport_login_url": "https://passport.weibo.cn/signin/login?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2Fu%2F3894655667", 
         "title": "\u4e2a\u4eba\u4e3b\u9875", 
         "browserType": "Safari", 
         "isLogin": false, 
         "cacheHit": 0, 
         "deviceType": "Android", 
         "online": true, 
-        "seeLevel": false, 
-        "loginUrl": "https://passport.weibo.cn/signin/welcome?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347&containerid=100505&extparam=u5587464347", 
-        "scheme": "sinaweibo://userinfo?uid=5587464347&luicode=10000011&lfid=", 
+        "seeLevel": 2, 
+        "loginUrl": "https://passport.weibo.cn/signin/welcome?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2Fu%2F3894655667&containerid=100505&extparam=u3894655667", 
+        "scheme": "sinaweibo://userinfo?uid=3894655667&luicode=10000011&lfid=", 
         "showLoginButton": 1, 
         "showPopLogin": 0, 
         "isWechat": 0, 
         "hideHeaderBanner": 0, 
         "wm": null, 
-        "wx_authorize": "https://passport.weibo.com/othersitebind/authorize?site=weixin&entry=sinawap&type=normal&callback=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347", 
+        "wx_authorize": "https://passport.weibo.com/othersitebind/authorize?site=weixin&entry=sinawap&type=normal&callback=http%3A%2F%2Fm.weibo.cn%2Fu%2F3894655667", 
         "hideLoginBanner": 0, 
         "pageType": "userInfo", 
-        "wx_callback": "https://passport.weibo.com/othersitebind/authorize?entry=h53rdlanding&site=qq&callback=http%3A%2F%2Fm.weibo.cn%2Fu%2F5587464347", 
+        "wx_callback": "https://passport.weibo.com/othersitebind/authorize?entry=h53rdlanding&site=qq&callback=http%3A%2F%2Fm.weibo.cn%2Fu%2F3894655667", 
         "stage": "page", 
-        "containerid": "1005055587464347", 
-        "st": "3956b2", 
+        "containerid": "1005053894655667", 
+        "st": "69ed56", 
         "params": {
             "uicode": 10000011, 
             "v_p": 5, 
             "containerid": "100505", 
             "featurecode": 20000181, 
             "ext": "", 
-            "fid": "1005055587464347", 
-            "extparam": "u5587464347", 
-            "_T_WM": "6d0bd446a77d2176c7277aefe0385cce"
+            "fid": "1005053894655667", 
+            "extparam": "u3894655667", 
+            "_T_WM": "f2f1b3f3ca405620c01fe0ccc76c64d6"
         }
     }, 
     "stage": {
         "page": [
             {
-                "fixed": 1, 
-                "mod_type": "mod/topbar", 
                 "btn": {
                     "right": {
                         "type": "more", 
@@ -100,10 +55,24 @@
                     }, 
                     "left": "back"
                 }, 
-                "transparent": 1, 
                 "title": {
                     "txt_sub": false, 
                     "txt": "\u4e2a\u4eba\u4e3b\u9875"
+                }, 
+                "mod_type": "mod/topbar", 
+                "transparent": 1, 
+                "fixed": 1, 
+                "reg": {
+                    "right": {
+                        "url": "https://passport.weibo.cn/signin/welcome?entry=mweibo&r=http%3A%2F%2Fm.weibo.cn%2Fu%2F3894655667&containerid=100505&extparam=u3894655667", 
+                        "txt": "\u767b\u5f55", 
+                        "type": "login"
+                    }, 
+                    "left": {
+                        "url": "http://m.weibo.cn/reg/index?containerid=100505&extparam=u3894655667&_T_WM=f2f1b3f3ca405620c01fe0ccc76c64d6&v_p=5&featurecode=20000181&ext=&fid=1005053894655667&uicode=10000011", 
+                        "txt": "\u6ce8\u518c", 
+                        "type": "reg"
+                    }
                 }
             }, 
             {
@@ -111,12 +80,12 @@
                 "mod_type": "mod/cover", 
                 "ptype": "0", 
                 "relation": "0", 
-                "mblogNum": "147", 
-                "desc_scheme": "/users/5587464347", 
-                "id": "5587464347", 
+                "mblogNum": "1718", 
+                "desc_scheme": "/users/3894655667", 
+                "id": "3894655667", 
                 "buttons": [
                     {
-                        "scheme": "/msg/chat?uid=5587464347", 
+                        "scheme": "/msg/chat?uid=3894655667", 
                         "type": "link", 
                         "name": "\u79c1\u4fe1", 
                         "icon": "iconf_userinfo_message"
@@ -124,32 +93,30 @@
                     {
                         "type": "relation", 
                         "sub_type": 0, 
-                        "uid": "5587464347"
+                        "uid": "3894655667"
                     }
                 ], 
-                "verified": "", 
+                "verified": "1", 
                 "follow_me": "", 
-                "verified_reason": "", 
+                "verified_reason": "\u5fae\u535a\u641e\u7b11\u5e7d\u9ed8\u5e10\u53f7", 
                 "h5icon": {
-                    "main": 0, 
-                    "other": [
-                        "http://u1.sinaimg.cn/upload/2013/01/23/crown_2x.png"
-                    ]
+                    "main": "http://u1.sinaimg.cn/upload/2013/02/22/v_yellow_2x.png", 
+                    "other": []
                 }, 
-                "fansNum": "109062", 
-                "mbtype": "12", 
-                "verified_type": "-1", 
+                "fansNum": "43718", 
+                "mbtype": "0", 
+                "verified_type": "0", 
                 "ta": "\u4ed6", 
-                "avatar_hd": "http://tva2.sinaimg.cn/crop.0.0.1242.1242.1024/00668qIHjw8ezpkqo6romj30yi0yiack.jpg", 
-                "description": "\u5728\u5954\u5411\u9017\u6bd4\u7684\u8def\u4e0a\uff0c\u52c7\u5f80\u76f4\u524d\uff01", 
-                "mbrank": "4", 
-                "nativePlace": "\u5317\u4eac", 
-                "profile_image_url": "http://tva2.sinaimg.cn/crop.0.0.1242.1242.50/00668qIHjw8ezpkqo6romj30yi0yiack.jpg", 
-                "attNum": "196", 
-                "background": "http://ww1.sinaimg.cn/crop.0.0.640.640.640.750/00668qIHjw1ezpkpvid5sj30yi0yg78y.jpg", 
-                "favourites_count": "115", 
-                "name": "\u7eb8\u4e0a\u897f\u6e38", 
-                "created_at": "TueApr1421:13:34+08002015", 
+                "avatar_hd": "http://tva4.sinaimg.cn/crop.0.0.1152.1152.1024/e823bab3jw8es7d1ek9hyj20w00w0goa.jpg", 
+                "description": "\u4e00\u4e2a\u6709\u6001\u5ea6\u7684\u70ed\u95e8\u8d44\u8baf\u5e73\u53f0\u2014\u2014\u6bcf\u5929\u641c\u7f57\u6700\u641e\u7b11\u6700\u597d\u73a9\u7684\u5fae\u535a\uff0c\u5206\u4eab\u5168\u7403\u6700\u65b0\u9c9c\u3001\u65f6\u5c1a\u3001\u6709\u8da3\u7684\u8bdd\u9898\u3002\uff08\u6b22\u8fce\u5408\u4f5c\uff0c\u6295\u7a3f\uff09", 
+                "mbrank": "0", 
+                "nativePlace": "\u5e7f\u4e1c", 
+                "profile_image_url": "http://tva4.sinaimg.cn/crop.0.0.1152.1152.50/e823bab3jw8es7d1ek9hyj20w00w0goa.jpg", 
+                "attNum": "165", 
+                "background": "http://ww4.sinaimg.cn/crop.0.0.640.640.640.750/6ce2240djw1e8iktk4ohij20hs0hsmz6.jpg", 
+                "favourites_count": "145", 
+                "name": "\u70ed\u95e8\u8bc4\u8bba\u6392\u884c\u699c", 
+                "created_at": "SatNov0911:27:18+08002013", 
                 "following": ""
             }, 
             {
@@ -157,8 +124,8 @@
                 "mod_type": "mod/pagelist", 
                 "card_group": [
                     {
-                        "itemid": "1005055587464347_-_WEIBO_INDEX_PROFILE_APPS", 
-                        "async_api": "/page/card?itemid=1005055587464347_-_WEIBO_INDEX_PROFILE_APPS", 
+                        "itemid": "1005053894655667_-_WEIBO_INDEX_PROFILE_APPS", 
+                        "async_api": "/page/card?itemid=1005053894655667_-_WEIBO_INDEX_PROFILE_APPS", 
                         "openurl": "", 
                         "apps": [], 
                         "card_type": 2, 
@@ -166,8 +133,8 @@
                         "is_asyn": 1
                     }, 
                     {
-                        "itemid": "1005055587464347_-_WEIBO_INDEX_PROFILE_WEIBO_GROUP_OBJ", 
-                        "async_api": "/page/card?itemid=1005055587464347_-_WEIBO_INDEX_PROFILE_WEIBO_GROUP_OBJ", 
+                        "itemid": "1005053894655667_-_WEIBO_INDEX_PROFILE_WEIBO_GROUP_OBJ", 
+                        "async_api": "/page/card?itemid=1005053894655667_-_WEIBO_INDEX_PROFILE_WEIBO_GROUP_OBJ", 
                         "openurl": "", 
                         "card_type": 11, 
                         "card_type_name": "\u5fae\u535a", 
