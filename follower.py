@@ -1,47 +1,63 @@
 #encoding:utf-8
-import urllib2,cookielib,urllib,json,sys,time,re
 from bs4 import BeautifulSoup 
+import urllib2,cookielib,urllib,json,sys,time,re,threading
 
 cj=cookielib.CookieJar()
 opener=urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 opener.addheaders=[('User-agent','Mozilla/5.0 (Linux; U; Android 2.3.7; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1')]
 urllib2.install_opener(opener)
 
-user_url="http://m.weibo.cn/u/3894655667"
+def query(url):
+	request=urllib2.urlopen(url)
+	html=request.read()
+	html=html.replace('\n',' ')
+	data=json.loads(html)
+	return data
 
 
-request=urllib2.urlopen(user_url)
-html=request.read()
-html=html.replace('\n',' ')
+
+class timer(threading.Thread):
+	url=""
+	def __init__(self,url):
+		threading.Thread.__init__(self)
+		self.url=url
+	
+	def run(self):	
+		time1=time.time()
+		data=query(self.url)
+		time2=time.time()
+		print time2-time1
+		for j in xrange(10):
+			try:
+				user=data['cards'][0]['card_group'][j]
+				uid=user['user']['id']
+				print uid
+			except:
+				pass
+
+
+containerId='1005055587464347'
+user_url="http://m.weibo.cn/page/json?containerid="+containerId+"_-_FOLLOWERS"
+
+data=query(user_url)
+formated=json.dumps(data,indent=4)
 
 f=open('response.txt','w')
-#soup=BeautifulSoup(html,"lxml").prettify('utf-8') 
-#f.write(soup)
-config=re.findall(r'window.\$config=(.*?);',html)[0]
-render=re.findall(r'window.\$render_data =(.*?);',html)[0]
-config=config.replace(' ','')
-config=config.replace('\'','\"')
-render=render.replace(' ','')
-render=render.replace('\'','\"')
-config_decoded=json.loads(config)
-render_decoded=json.loads(render)
+f.write(formated.decode('unicode-escape').encode('utf-8'))
+count=data['count']
 
-f.write(json.dumps(config_decoded,indent=4))
-f.write(json.dumps(render_decoded,indent=4))
+page_count=(count-1)/10+1
+timers=[]
+for i in xrange(page_count):
+	timers.append(timer(user_url+'&page='+str(i+1)))
+	
+time1=time.time()
+for i in xrange(page_count):
+	timers[i].setDaemon(True)
+	timers[i].start()
 
-containerId= render_decoded['common']['containerid']
-Id=render_decoded['stage']['page'][1]['id']
-fansNum=render_decoded['stage']['page'][1]['fansNum']
-attNum=render_decoded['stage']['page'][1]['attNum']
-description=render_decoded['stage']['page'][1]['description']
-nativePlace=render_decoded['stage']['page'][1]['nativePlace']
-name=render_decoded['stage']['page'][1]['name']
-gender=render_decoded['stage']['page'][1]['ta']
-print Id
-print containerId
-print fansNum
-print attNum
-print description
-print nativePlace
-print name
-print gender
+
+for i in xrange(page_count):
+	timers[i].join()
+time2=time.time()
+print time2-time1
