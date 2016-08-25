@@ -1,44 +1,16 @@
 #encoding:utf-8
 from bs4 import BeautifulSoup 
 import urllib2,cookielib,urllib,json,sys,time,re,threading,random
+from  opener import Opener
 
-
-ua=[	"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50","Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50",
-	"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0",
-	" Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1",
-	"Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1",
-	"Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11",
-	"Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11",
-	" Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Maxthon 2.0)",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TencentTraveler 4.0)",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World)",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Avant Browser)",
-	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)",
-	"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
-	"Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
-	"Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
-	" Mozilla/5.0 (Linux; U; Android 2.3.7; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
-	" MQQBrowser/26 Mozilla/5.0 (Linux; U; Android 2.3.7; zh-cn; MB200 Build/GRJ22; CyanogenMod-7) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
-	" Opera/9.80 (Android 2.3.4; Linux; Opera Mobi/build-1107180945; U; en-GB) Presto/2.8.149 Version/11.10",
-	" Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13",
-	" Mozilla/5.0 (BlackBerry; U; BlackBerry 9800; en) AppleWebKit/534.1+ (KHTML, like Gecko) Version/6.0.0.337 Mobile Safari/534.1+",
-	" Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.0; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/233.70 Safari/534.6 TouchPad/1.0",
-	" Mozilla/5.0 (SymbianOS/9.4; Series60/5.0 NokiaN97-1/20.0.019; Profile/MIDP-2.1 Configuration/CLDC-1.1) AppleWebKit/525 (KHTML, like Gecko) BrowserNG/7.1.18124",
-	" Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; HTC; Titan)",
-	" UCWEB7.0.2.37/28/999",
-	" NOKIA5700/ UCWEB7.0.2.37/28/999",
-	" Openwave/ UCWEB7.0.2.37/28/999",
-	" Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999"]
-
-def query(url):
-	opener=urllib2.build_opener()
-	opener.addheaders=[	('User-agent',random.choice(ua)),("X-Requested-With","XMLHttpRequest")]
-	urllib2.install_opener(opener)
-	request=urllib2.urlopen(url)
+def queryFollower(url):
+	urllib2.install_opener(Opener().getOpener())
+	while True:
+		try:
+			request=urllib2.urlopen(url)
+			break
+		except:
+			pass
 	html=request.read()
 	html=html.replace('\n',' ')
 	data=json.loads(html)
@@ -55,7 +27,7 @@ class timer(threading.Thread):
 		self.res=res
 	
 	def run(self):	
-		data=query(self.url)
+		data=queryFollower(self.url)
 		for j in xrange(10):
 			try:
 				user=data['cards'][0]['card_group'][j]
@@ -66,7 +38,7 @@ class timer(threading.Thread):
 
 def getFollowers(containerId):
 	user_url="http://m.weibo.cn/page/json?containerid="+containerId+"_-_FOLLOWERS"
-	data=query(user_url)
+	data=queryFollower(user_url)
 	formated=json.dumps(data,indent=4)
 	f=open('response.txt','w')
 	f.write(formated.decode('unicode-escape').encode('utf-8'))
@@ -83,8 +55,43 @@ def getFollowers(containerId):
 		timers[i].join()
 	return res
 
-containerId='1005053109642975'
-res=getFollowers(containerId)
-print res
-print len(res)
+
+def getUser(uid):
+	urllib2.install_opener(Opener().getOpener())
+	user_url="http://m.weibo.cn/u/"+uid
+	request=urllib2.urlopen(user_url)
+	html=request.read()
+	html=html.replace('\n',' ')
+	config=re.findall(r'window.\$config=(.*?);',html)[0]
+	render=re.findall(r'window.\$render_data =(.*?);',html)[0]
+	config=config.replace(' ','')
+	config=config.replace('\'','\"')
+	render=render.replace(' ','')
+	render=render.replace('\'','\"')
+	config_decoded=json.loads(config)
+	render_decoded=json.loads(render)
+
+	containerId= render_decoded['common']['containerid']
+	Id=render_decoded['stage']['page'][1]['id']
+	description=render_decoded['stage']['page'][1]['description']
+	nativePlace=render_decoded['stage']['page'][1]['nativePlace']
+	name=render_decoded['stage']['page'][1]['name']
+	gender=render_decoded['stage']['page'][1]['ta']
+	dicts={}
+	dicts['uid']=Id
+	dicts['containerId']=containerId
+	dicts['description']=description
+	dicts['nativePlace']=nativePlace
+	dicts['name']=name
+	dicts['gender']=gender
+	return dicts
+	
+if __name__=='__main__':
+	uid='1660141095'
+	containerId='1005051660141095'
+	dicts=getUser(uid)
+	res=getFollowers(dicts['containerId'])
+	print res
+	print len(res)
+
 
