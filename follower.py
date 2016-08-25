@@ -1,13 +1,43 @@
 #encoding:utf-8
 from bs4 import BeautifulSoup 
-import urllib2,cookielib,urllib,json,sys,time,re,threading
+import urllib2,cookielib,urllib,json,sys,time,re,threading,random
 
-cj=cookielib.CookieJar()
-opener=urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
-opener.addheaders=[('User-agent','Mozilla/5.0 (Linux; U; Android 2.3.7; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1')]
-urllib2.install_opener(opener)
+
+ua=[	"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50","Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50",
+	"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0",
+	" Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1",
+	"Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1",
+	"Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11",
+	"Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11",
+	" Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Maxthon 2.0)",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TencentTraveler 4.0)",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; The World)",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; SE 2.X MetaSr 1.0; SE 2.X MetaSr 1.0; .NET CLR 2.0.50727; SE 2.X MetaSr 1.0)",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Avant Browser)",
+	" Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)",
+	"Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
+	"Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
+	"Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5",
+	" Mozilla/5.0 (Linux; U; Android 2.3.7; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
+	" MQQBrowser/26 Mozilla/5.0 (Linux; U; Android 2.3.7; zh-cn; MB200 Build/GRJ22; CyanogenMod-7) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
+	" Opera/9.80 (Android 2.3.4; Linux; Opera Mobi/build-1107180945; U; en-GB) Presto/2.8.149 Version/11.10",
+	" Mozilla/5.0 (Linux; U; Android 3.0; en-us; Xoom Build/HRI39) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13",
+	" Mozilla/5.0 (BlackBerry; U; BlackBerry 9800; en) AppleWebKit/534.1+ (KHTML, like Gecko) Version/6.0.0.337 Mobile Safari/534.1+",
+	" Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.0; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/233.70 Safari/534.6 TouchPad/1.0",
+	" Mozilla/5.0 (SymbianOS/9.4; Series60/5.0 NokiaN97-1/20.0.019; Profile/MIDP-2.1 Configuration/CLDC-1.1) AppleWebKit/525 (KHTML, like Gecko) BrowserNG/7.1.18124",
+	" Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; HTC; Titan)",
+	" UCWEB7.0.2.37/28/999",
+	" NOKIA5700/ UCWEB7.0.2.37/28/999",
+	" Openwave/ UCWEB7.0.2.37/28/999",
+	" Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999"]
 
 def query(url):
+	opener=urllib2.build_opener()
+	opener.addheaders=[	('User-agent',random.choice(ua)),("X-Requested-With","XMLHttpRequest")]
+	urllib2.install_opener(opener)
 	request=urllib2.urlopen(url)
 	html=request.read()
 	html=html.replace('\n',' ')
@@ -18,46 +48,43 @@ def query(url):
 
 class timer(threading.Thread):
 	url=""
-	def __init__(self,url):
+	res=[]
+	def __init__(self,url,res):
 		threading.Thread.__init__(self)
 		self.url=url
+		self.res=res
 	
 	def run(self):	
-		time1=time.time()
 		data=query(self.url)
-		time2=time.time()
-		print time2-time1
 		for j in xrange(10):
 			try:
 				user=data['cards'][0]['card_group'][j]
 				uid=user['user']['id']
-				print uid
+				self.res.append(uid)
 			except:
 				pass
 
+def getFollowers(containerId):
+	user_url="http://m.weibo.cn/page/json?containerid="+containerId+"_-_FOLLOWERS"
+	data=query(user_url)
+	formated=json.dumps(data,indent=4)
+	f=open('response.txt','w')
+	f.write(formated.decode('unicode-escape').encode('utf-8'))
+	count=data['count']
+	page_count=(count-1)/10+1
+	timers=[]
+	res=[]
+	for i in xrange(page_count):
+		timers.append(timer(user_url+'&page='+str(i+1),res))
+	for i in xrange(page_count):
+		timers[i].setDaemon(True)
+		timers[i].start()
+	for i in xrange(page_count):
+		timers[i].join()
+	return res
 
-containerId='1005055587464347'
-user_url="http://m.weibo.cn/page/json?containerid="+containerId+"_-_FOLLOWERS"
+containerId='1005053109642975'
+res=getFollowers(containerId)
+print res
+print len(res)
 
-data=query(user_url)
-formated=json.dumps(data,indent=4)
-
-f=open('response.txt','w')
-f.write(formated.decode('unicode-escape').encode('utf-8'))
-count=data['count']
-
-page_count=(count-1)/10+1
-timers=[]
-for i in xrange(page_count):
-	timers.append(timer(user_url+'&page='+str(i+1)))
-	
-time1=time.time()
-for i in xrange(page_count):
-	timers[i].setDaemon(True)
-	timers[i].start()
-
-
-for i in xrange(page_count):
-	timers[i].join()
-time2=time.time()
-print time2-time1
