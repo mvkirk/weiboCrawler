@@ -3,8 +3,8 @@ import follower,database,sys,Queue,logging,time
 logging.basicConfig(level=logging.DEBUG,
                 format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
                 datefmt='%a, %d %b %Y %H:%M:%S',
-                filename='log.txt',
-                filemode='w+')
+                filename='userGet.log',
+                filemode='a')
 
 db=database.Database()
 queue=Queue.Queue(1000000)
@@ -13,12 +13,12 @@ def process():
 	uid=queue.get()
 	if db.findUser(uid):
 		return
-	try:
+	try:#parse error,then omit it.
 		dicts=follower.getUser(uid)
 	except:
 		return
 	db.insertUser(dicts)
-	try:
+	try:#parse error,omit it.
 		followers=follower.getFollowers(dicts['containerId'])
 	except:
 		return
@@ -29,7 +29,7 @@ def process():
 	logging.info(str(uid)+'\t'+dicts['name']+" has been recorded.")
 
 if __name__=='__main__':
-	startUid='1667553532'
+	startUid='2019860947'
 	if db.findUser(startUid):
 		dicts=follower.getUser(startUid)	
 		followers=follower.getFollowers(dicts['containerId'])
@@ -38,11 +38,6 @@ if __name__=='__main__':
 	                        queue.put(it)
 	else:
 		queue.put(startUid)
-	cnt=0
 	while not queue.empty():
 		process()
-		cnt+=1
-		if cnt%100==0:
-			cnt=0
-			time.sleep(1800)
 	db.close()

@@ -1,4 +1,4 @@
-import urllib2,random
+import urllib2,random,time
 ua=["Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50","Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50",
 	"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0",
 	" Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1",
@@ -29,12 +29,29 @@ ua=["Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50
 	" NOKIA5700/ UCWEB7.0.2.37/28/999",
 	" Openwave/ UCWEB7.0.2.37/28/999",
 	" Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999"]
-proxy=["http://localhost:1234","http://120.27.41.126:1234"]
 def getOpener():
-	#proxy_handler = urllib2.ProxyHandler({"http" : random.choice(proxy)})
-	#opener=urllib2.build_opener(proxy_handler)
-	opener=urllib2.build_opener()
-        opener.addheaders=[('User-agent',random.choice(ua))]
+	proxy_handler = urllib2.ProxyHandler({"http" : 'http://localhost:1234'})
+	opener=urllib2.build_opener(proxy_handler)
+	#opener=urllib2.build_opener()
+	opener.addheaders=[('User-agent',random.choice(ua)),("Connection","keep-alive"),("x-forwart-for","22,22,33,44")]
 	return opener
 if __name__=='__main__':
-	pass
+	opener=getOpener()
+	urllib2.install_opener(opener)
+	cnt=0
+	total=100
+	time1=time.time()
+	for i in xrange(total):
+		try:
+			data=urllib2.urlopen('http://m.weibo.cn/page/json?containerid=1005053894655667_-_FOLLOWERS').read()
+			#data=urllib2.urlopen('http://www.oschina.com').read()
+			print 'done'
+			cnt+=1;
+		except Exception,e:
+			print 'error'
+			print e
+	time2=time.time()
+	print str(cnt)+'/'+str(total)+' in '+str(time2-time1)+"s"
+	
+
+

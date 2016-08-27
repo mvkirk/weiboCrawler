@@ -3,20 +3,21 @@ from bs4 import BeautifulSoup
 import urllib2,cookielib,urllib,json,sys,time,re,threading,random
 from  opener import getOpener
 
-def queryFollower(url):
-	urllib2.install_opener(getOpener())
-	while True:
-		try:
-			request=urllib2.urlopen(url)
-			break
-		except:
-			print '403'
-	print 'done'
-	html=request.read()
-	html=html.replace('\n',' ')
-	data=json.loads(html)
-	return data
 
+def queryUrl(url):
+        urllib2.install_opener(getOpener())
+        cnt=0
+        while True:
+		cnt+=1
+                try:
+                        request=urllib2.urlopen(url)
+                        break
+                except:
+			pass
+	print '\rdone in '+str(cnt)+' request(s)'
+        html=request.read()
+        html=html.replace('\n',' ')
+	return html
 
 
 class timer(threading.Thread):
@@ -28,7 +29,8 @@ class timer(threading.Thread):
 		self.res=res
 	
 	def run(self):	
-		data=queryFollower(self.url)
+		html=queryUrl(self.url)
+		data=json.loads(html)
 		for j in xrange(10):
 			try:
 				user=data['cards'][0]['card_group'][j]
@@ -39,7 +41,8 @@ class timer(threading.Thread):
 
 def getFollowers(containerId):
 	user_url="http://m.weibo.cn/page/json?containerid="+containerId+"_-_FOLLOWERS"
-	data=queryFollower(user_url)
+	html=queryUrl(user_url)
+	data=json.loads(html)
 	formated=json.dumps(data,indent=4)
 	count=data['count']
 	page_count=(count-1)/10+1
@@ -56,35 +59,22 @@ def getFollowers(containerId):
 
 
 def getUser(uid):
- 	while True:
-		urllib2.install_opener(getOpener())
-		user_url="http://m.weibo.cn/u/"+str(uid)
-		hasPage=False
-		try:
-			request=urllib2.urlopen(user_url)
-			hasPage=True
-		except:
-			print '403'
-			continue	
-		html=request.read()
-		html=html.replace('\n',' ')
-		config=re.findall(r'window.\$config=(.*?);',html)[0]
-		render=re.findall(r'window.\$render_data =(.*?);',html)[0]
-		config=config.replace(' ','')
-		config=config.replace('\'','\"')
-		render=render.replace(' ','')
-		render=render.replace('\'','\"')
-		config_decoded=json.loads(config)
-		render_decoded=json.loads(render)
-		containerId= render_decoded['common']['containerid']
-		Id=render_decoded['stage']['page'][1]['id']
-		description=render_decoded['stage']['page'][1]['description']
-		nativePlace=render_decoded['stage']['page'][1]['nativePlace']
-		name=render_decoded['stage']['page'][1]['name']
-		gender=render_decoded['stage']['page'][1]['ta']
-		if hasPage:
-			break
-	print 'done'
+	user_url="http://m.weibo.cn/u/"+str(uid)
+	html=queryUrl(user_url)
+	config=re.findall(r'window.\$config=(.*?);',html)[0]
+	render=re.findall(r'window.\$render_data =(.*?);',html)[0]
+	config=config.replace(' ','')
+	config=config.replace('\'','\"')
+	render=render.replace(' ','')
+	render=render.replace('\'','\"')
+	config_decoded=json.loads(config)
+	render_decoded=json.loads(render)
+	containerId= render_decoded['common']['containerid']
+	Id=render_decoded['stage']['page'][1]['id']
+	description=render_decoded['stage']['page'][1]['description']
+	nativePlace=render_decoded['stage']['page'][1]['nativePlace']
+	name=render_decoded['stage']['page'][1]['name']
+	gender=render_decoded['stage']['page'][1]['ta']
 	dicts={}
 	dicts['uid']=Id
 	dicts['containerId']=containerId
