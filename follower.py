@@ -8,6 +8,9 @@ def queryUrl(url):
         urllib2.install_opener(getOpener())
         cnt=0
         while True:
+		if cnt>1000:
+			print 'sleep 6000s'
+			time.sleep(6000)
 		cnt+=1
                 try:
                         request=urllib2.urlopen(url)

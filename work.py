@@ -29,7 +29,7 @@ def process():
 	logging.info(str(uid)+'\t'+dicts['name']+" has been recorded.")
 
 if __name__=='__main__':
-	startUid='2019860947'
+	startUid='2002575703'
 	if db.findUser(startUid):
 		dicts=follower.getUser(startUid)	
 		followers=follower.getFollowers(dicts['containerId'])

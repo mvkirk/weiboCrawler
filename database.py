@@ -3,7 +3,7 @@ import MySQLdb
 class Database:
 	conn=''
 	def __init__(self):
-		self.conn=MySQLdb.connect(host='localhost',user='root',passwd='15062880460ding',db='weibo',port=3306,charset='utf8')
+		self.conn=MySQLdb.connect(host='115.159.127.117',user='crawler',passwd='123456',db='weibo',port=3306,charset='utf8')
 		
 	def insertUser(self,dicts):
 		uid=dicts['uid']
