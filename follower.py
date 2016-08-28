@@ -5,15 +5,18 @@ from  opener import getOpener
 
 
 def queryUrl(url):
-        urllib2.install_opener(getOpener())
+        opener=getOpener()
         cnt=0
         while True:
 		cnt+=1
                 try:
-                        request=urllib2.urlopen(url)
+                        request=opener.open(url,timeout=2)
                         break
                 except:
-			pass
+			print 'error'
+			if cnt>10:
+				cnt=0
+				opener=getOpener()
 	print '\rdone in '+str(cnt)+' request(s)'
         html=request.read()
         html=html.replace('\n',' ')

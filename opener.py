@@ -29,12 +29,16 @@ ua=["Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50
 	" NOKIA5700/ UCWEB7.0.2.37/28/999",
 	" Openwave/ UCWEB7.0.2.37/28/999",
 	" Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999"]
-proxy=["http://localhost:1234","http://120.27.41.126:1234"]
+
+f=open('res.txt','r')
+openers=[]
+for line in f:
+	proxy_handler = urllib2.ProxyHandler({"http" : line[0:-1]})
+	openers.append(urllib2.build_opener(proxy_handler))
+
 def getOpener():
-	#proxy_handler = urllib2.ProxyHandler({"http" : random.choice(proxy)})
-	#opener=urllib2.build_opener(proxy_handler)
-	opener=urllib2.build_opener()
-        opener.addheaders=[('User-agent',random.choice(ua))]
+	opener=random.choice(openers)
+	opener.addheaders=[('User-agent',random.choice(ua))]
 	return opener
 if __name__=='__main__':
 	pass
