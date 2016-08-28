@@ -39,5 +39,9 @@ if __name__=='__main__':
 	else:
 		queue.put(startUid)
 	while not queue.empty():
-		process()
+		try:
+			process()
+		except:
+			print 'lost connection'
+			db=database.Database()
 	db.close()
