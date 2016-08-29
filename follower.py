@@ -13,7 +13,6 @@ def queryUrl(url):
                         request=opener.open(url,timeout=2)
                         break
                 except:
-			print 'error'
 			if cnt>10:
 				cnt=0
 				opener=getOpener()
