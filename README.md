@@ -3,13 +3,13 @@
 database.py内定义了数据库接口，数据表默认定义在服务器115.159.127.117上，用户名为crawler,数据库名为weibo。内含两个数据表，use表和relation表。
 
   CREATE TABLE `user` (
-    `uid` varchar(20) NOT NULL,
-    `containerId` varchar(20) NOT NULL,
-    `name` varchar(50) NOT NULL,
-    `gender` varchar(5) NOT NULL,
-    `description` mediumtext,
-    `nativePlace` varchar(10) DEFAULT NULL,
-    PRIMARY KEY (`uid`)
+     `uid` varchar(20) NOT NULL,
+     `containerId` varchar(20) NOT NULL,
+     `name` varchar(50) NOT NULL,
+     `gender` varchar(5) NOT NULL,
+     `description` mediumtext,
+     `nativePlace` varchar(10) DEFAULT NULL,
+     PRIMARY KEY (`uid`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
   CREATE TABLE `relation` (
