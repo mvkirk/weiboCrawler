@@ -1,5 +1,4 @@
 #encoding:utf-8
-from bs4 import BeautifulSoup 
 import urllib2,cookielib,urllib,json,sys,time,re,threading,random
 from  opener import getOpener
 
