@@ -10,13 +10,13 @@ def queryUrl(url):
 		cnt+=1
                 try:
                         request=opener.open(url,timeout=2)
+        		html=request.read()
                         break
                 except:
 			if cnt>10:
 				cnt=0
 				opener=getOpener()
 	print '\rdone in '+str(cnt)+' request(s)'
-        html=request.read()
         html=html.replace('\n',' ')
 	return html
 
@@ -24,8 +24,10 @@ def queryUrl(url):
 class timer(threading.Thread):
 	url=""
 	res=[]
-	def __init__(self,url,res):
+	mod=0#0--query followers;1--query starUsers.
+	def __init__(self,url,res,mod):
 		threading.Thread.__init__(self)
+		self.mod=mod
 		self.url=url
 		self.res=res
 	
@@ -34,29 +36,60 @@ class timer(threading.Thread):
 		data=json.loads(html)
 		for j in xrange(10):
 			try:
-				user=data['cards'][0]['card_group'][j]
-				uid=user['user']['id']
-				self.res.append(uid)
-			except:
+				if self.mod == 0:
+					obj=data['cards'][0]['card_group'][j]
+					uid=obj['user']['id']
+					self.res.append(uid)
+				elif self.mod == 1 :
+					obj=data['cards'][0]['card_group'][j]
+					mblog=obj['mblog']
+					uid=mblog['user']['id']
+					if uid==None:
+						continue
+					time=mblog['created_timestamp']
+					self.res.append((uid,time))
+				else:
+					pass
+			except Exception ,e:
+				#print j,e
 				pass
 
 def getFollowers(containerId):
 	user_url="http://m.weibo.cn/page/json?containerid="+containerId+"_-_FOLLOWERS"
 	html=queryUrl(user_url)
 	data=json.loads(html)
-	formated=json.dumps(data,indent=4)
 	count=data['count']
 	page_count=(count-1)/10+1
 	timers=[]
 	res=[]
 	for i in xrange(page_count):
-		timers.append(timer(user_url+'&page='+str(i+1),res))
+		timers.append(timer(user_url+'&page='+str(i+1),res,0))
 	for i in xrange(page_count):
 		timers[i].setDaemon(True)
 		timers[i].start()
 	for i in xrange(page_count):
 		timers[i].join()
 	return res
+
+def getStarredUsers(containerId):
+	user_url="http://m.weibo.cn/page/json?containerid="+containerId+"_-_WEIBO_SECOND_PROFILE_LIKE_WEIBO"
+	html=queryUrl(user_url)
+	data=json.loads(html)
+	count=data['count']
+	count=min(count,1000)
+	page_count=(count-1)/10+1
+	timers=[]
+	res=[]
+	for i in xrange(page_count):
+		timers.append(timer(user_url+'&page='+str(i+1),res,1))
+	for i in xrange(page_count):
+		timers[i].setDaemon(True)
+		timers[i].start()
+	for i in xrange(page_count):
+		timers[i].join()
+	return res
+
+	
 
 
 def getUser(uid):
@@ -89,8 +122,9 @@ if __name__=='__main__':
 	uid='1660141095'
 	containerId='1005051660141095'
 	dicts=getUser(uid)
-	res=getFollowers(dicts['containerId'])
+	res=getStarUsers(dicts['containerId'])
 	print res
 	print len(res)
+
 
 

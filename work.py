@@ -18,6 +18,17 @@ def process():
 	except:
 		return
 	db.insertUser(dicts)
+	logging.info(str(uid)+'\t'+dicts['name']+" will be recorded.")
+	print 'inserUser done'
+	try:
+		data=follower.getStarredUsers(dicts['containerId'])
+	except:
+		return
+	try:
+		db.insertStar(uid,data)
+	except:
+		pass
+	print 'insertStar done'
 	try:#parse error,omit it.
 		followers=follower.getFollowers(dicts['containerId'])
 	except:
@@ -26,10 +37,12 @@ def process():
 		if not queue.full():
 			queue.put(it)	
 	db.insertRelation(uid,followers)
+	print 'insertRelation done'
 	logging.info(str(uid)+'\t'+dicts['name']+" has been recorded.")
 
 if __name__=='__main__':
-	startUid='2655485361'
+	#startUid='5320278224' me
+	startUid='5320278224'
 	if db.findUser(startUid):
 		dicts=follower.getUser(startUid)	
 		followers=follower.getFollowers(dicts['containerId'])
@@ -41,7 +54,8 @@ if __name__=='__main__':
 	while not queue.empty():
 		try:
 			process()
-		except:
+		except Exception,e:
 			print 'lost connection'
+			print e
 			db=database.Database()
 	db.close()

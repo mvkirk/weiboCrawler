@@ -3,7 +3,7 @@ import MySQLdb
 class Database:
 	conn=''
 	def __init__(self):
-		self.conn=MySQLdb.connect(host='115.159.127.117',user='crawler',passwd='123456',db='weibo',port=3306,charset='utf8')
+		self.conn=MySQLdb.connect(host='localhost',user='crawler',passwd='123456',db='weibo',port=3306,charset='utf8')
 		
 	def insertUser(self,dicts):
 		uid=dicts['uid']
@@ -29,6 +29,16 @@ class Database:
 		cursor.close()
 		self.conn.commit()
 	
+	def insertStar(self,userId,data):
+		sql='insert into star(UserId,starredUserId,startime) values(%s,%s,FROM_UNIXTIME(%s))'
+		param=[]
+		for dat in data:
+			param.append((userId,dat[0],dat[1]))
+		cursor=self.conn.cursor()
+		n=cursor.executemany(sql,param)
+		cursor.close()
+		self.conn.commit()
+	
 	def findUser(self,uid):
 		sql='select uid from user where uid=%s'
 		param=[uid]
@@ -37,7 +47,7 @@ class Database:
 		cursor.close()
 		self.conn.commit()
 		return n!=0
-
+	
 	def close(self):
 		self.conn.close()
 if __name__=='__main__':
