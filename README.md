@@ -34,6 +34,8 @@ CREATE TABLE `star` (
 分别保存用户信息、用户之间的关注关系和用户之间的点赞关系。
 ## follower.py
 follower.py内封装了对于指定用户爬取其关注的用户的方法。
+## star.py
+star.py内封装了对于指定用户爬取其点赞的用户的方法。
 ## opener.py
 opener.py内独立封装了一些防反爬虫的头信息。
 ## test.py
